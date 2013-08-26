@@ -1,0 +1,28 @@
+//= require jquery
+
+<% environment.context_class.instance_eval { include LiquidHaml::ApplicationHelper } %>
+
+var LiquidHaml = LiquidHaml || (function() {
+    return {
+        render: function(path, options) {
+            var template_result = '';
+            
+            options = options || {}
+
+            $.ajax('<%= liquid_haml_config.mount_path %>', {
+                type: 'post',
+                async: false,
+                data: {
+                    path: path,
+                    scope: options.scope || {},
+                    locals: options.locals || {}
+                },
+                success: function(data) {
+                    template_result = data;
+                }
+            });
+
+            return template_result;
+        }
+    };
+})();

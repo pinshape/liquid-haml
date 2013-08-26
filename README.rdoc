@@ -1,0 +1,6 @@
+= LiquidHaml
+
+This project rocks and uses MIT-LICENSE.
+
+At the moments this just pipes requests for templates to the server-side.
+I plan to turn into a full blown haml-to-js compiler module for HAML. Somewhen.

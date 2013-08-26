@@ -1,0 +1,3 @@
+.local_div
+  %h1 LOCAL
+  = local
