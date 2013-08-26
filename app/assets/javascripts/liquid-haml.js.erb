@@ -14,8 +14,8 @@ var LiquidHaml = LiquidHaml || (function() {
                 async: false,
                 data: {
                     path: path,
-                    scope: options.scope || {},
-                    locals: options.locals || {}
+                    scope: JSON.stringify(options.scope || {}),
+                    locals: JSON.stringify(options.locals || {})
                 },
                 success: function(data) {
                     template_result = data;

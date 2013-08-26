@@ -4,3 +4,7 @@
 
   %h1 FROM SCOPE
   = @this.is.sorta
+
+  %h1 LIST THING
+  %ul
+    = render :partial => 'element', :collection => @list

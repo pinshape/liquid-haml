@@ -1,8 +1,9 @@
 .bundle/
 log/*.log
 pkg/
-spec/db/*.sqlite3
-spec/db/*.sqlite3-journal
-spec/log/*.log
-spec/tmp/
-spec/.sass-cache
+spec/dummy/db/*.sqlite3
+spec/dummy/db/*.sqlite3-journal
+spec/dummy/log/*.log
+spec/dummy/tmp/**
+spec/dummy/.sass-cache
+.fuse_hidden*

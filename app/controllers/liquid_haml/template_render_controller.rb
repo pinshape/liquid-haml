@@ -1,12 +1,12 @@
 class LiquidHaml::TemplateRenderController < ApplicationController
   def render_template
     template_path  = params[:path]
-    scope = params[:scope] || {}
-    locals = params[:locals] || {}
+    scope = JSON.parse(params[:scope] || '{}')
+    locals = JSON.parse(params[:locals] || '{}') 
     layout = params[:layout] || false
 
     scope.each  do |k, v|
-      v = ostructify(v) if v.is_a?(Hash)
+      v = ostructify(v)
       self.instance_variable_set(:"@#{k}", v)
     end
     locals.each do |k, v|
@@ -17,21 +17,21 @@ class LiquidHaml::TemplateRenderController < ApplicationController
   end
 
   private
-    module HashToOpenstruct
-      require 'ostruct'
-
-      def to_ostruct
-        o = OpenStruct.new(self)
-        each.with_object(o) do |(k,v), o|
-          class << v; include HashToOpenstruct; end if v.is_a?(Hash)
-          o.send(:"#{k}=", v.to_ostruct) if v.respond_to? :to_ostruct
-        end
-        o
-      end
-    end
+    require 'ostruct'
 
     def ostructify(what)
-      class << what; include HashToOpenstruct; end
-      what.to_ostruct
+      case what
+        when Hash
+          ostructed = OpenStruct.new(what)
+          what.each do |k,v|
+            ostructed.send(:"#{k}=", ostructify(v))
+          end
+        when Array
+          ostructed = what.map { |elem| ostructify(elem) }
+        else
+          ostructed = what
+      end
+
+      ostructed
     end
 end
