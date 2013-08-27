@@ -13,8 +13,33 @@ class LiquidHaml::TemplateRenderController < ApplicationController
       locals[k] = ostructify(v) if v.is_a?(Hash)
     end
 
-    render :file => Rails.root.join('app', 'views', 'application/other_test'), :locals => locals, :layout => layout
+    render :file => Rails.root.join('app', 'views', template_path), :locals => locals, :layout => layout
   end
+
+  # def method_missing(name, *args, &block)
+  #   puts "got method: #{name}"
+  #   super
+  # end
+
+  protected
+    # def _routes
+    #   main_app
+    # end
+
+    # def _helpers
+
+    # end
+
+    def self.view_context_class
+      context_class = super
+      context_class.send(:include, Rails.application.routes.url_helpers)
+    end
+
+    def _render_template(options)
+      lookup_context.rendered_format = nil if options[:formats]
+
+      view_renderer.render(view_context, options)
+    end
 
   private
     require 'ostruct'
