@@ -1,3 +1,4 @@
+require 'liquid_haml/version'
 require 'liquid_haml/engine'
 
 module LiquidHaml

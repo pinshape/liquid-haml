@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
 
   def test; end
   def other_test
+    binding.pry
+
     render :file => Rails.root.join('app', 'views', 'application/other_test'), :locals => { :local => 'derp' }
   end
 end

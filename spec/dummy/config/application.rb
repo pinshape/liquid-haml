@@ -8,9 +8,6 @@ require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 
 Bundler.require(*Rails.groups)
-require "haml"
-require "liquid_haml"
-require "jquery-rails"
 
 module Spec
   class Application < Rails::Application
