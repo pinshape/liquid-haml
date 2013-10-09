@@ -9,7 +9,8 @@ class LiquidHaml::TemplateRenderController < ApplicationController
       v = ostructify(v)
       self.instance_variable_set(:"@#{k}", v)
     end
-    locals.each do |k, v|
+    
+    locals.symbolize_keys!.each do |k, v|
       locals[k] = ostructify(v) if v.is_a?(Hash)
     end
 
