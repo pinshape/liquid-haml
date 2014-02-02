@@ -1,4 +1,4 @@
-//= require jquery
+// require jquery
 
 <% environment.context_class.instance_eval { include LiquidHaml::ApplicationHelper } %>
 
@@ -23,6 +23,23 @@ var LiquidHaml = LiquidHaml || (function() {
             });
 
             return template_result;
+        },
+        render_async: function(path, options, callback) {
+            var template_result = '';
+            
+            options = options || {}
+
+            $.ajax('<%= liquid_haml_config.mount_path %>', {
+                type: 'post',
+                data: {
+                    path: path,
+                    scope: JSON.stringify(options.scope || {}),
+                    locals: JSON.stringify(options.locals || {})
+                },
+                success: function(data) {
+                    callback(data);
+                }
+            });
         }
     };
 })();

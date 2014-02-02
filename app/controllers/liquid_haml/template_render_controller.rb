@@ -14,6 +14,8 @@ class LiquidHaml::TemplateRenderController < ApplicationController
       locals[k] = ostructify(v) if v.is_a?(Hash)
     end
 
+    # sleep 1
+
     render :file => Rails.root.join('app', 'views', template_path), :locals => locals, :layout => layout
   end
 
