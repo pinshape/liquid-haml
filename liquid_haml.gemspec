@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'rails', '>= 4.0.0'
   s.add_dependency 'haml',  '~> 4.0.0'
+  s.add_dependency 'hashie', '~> 2.1.1'
   s.add_dependency 'jquery-rails'
   s.add_development_dependency 'rspec'
 end

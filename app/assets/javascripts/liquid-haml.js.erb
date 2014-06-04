@@ -24,7 +24,7 @@ var LiquidHaml = LiquidHaml || (function() {
 
             return template_result;
         },
-        render_async: function(path, options, callback) {
+        render_async: function(path, options, callback, error_callback) {
             var template_result = '';
             
             options = options || {}
@@ -38,6 +38,9 @@ var LiquidHaml = LiquidHaml || (function() {
                 },
                 success: function(data) {
                     callback(data);
+                },
+                error: function(data) {
+                    error_callback(data);
                 }
             });
         }
