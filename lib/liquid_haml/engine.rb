@@ -9,7 +9,7 @@ module LiquidHaml
     # For the time being it just snips the last two +define_method+s from the c&ped definition
     # but it works as it should.
     def self.isolate_namespace(mod)
-      engine_name(generate_railtie_name(mod))
+      engine_name(generate_railtie_name(mod.name))
 
       self.routes.default_scope = { module: ActiveSupport::Inflector.underscore(mod.name) }
       self.isolated = true
